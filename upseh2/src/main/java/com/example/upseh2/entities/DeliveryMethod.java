@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity
 @Table(name = "delivery_methods")
 @Getter
@@ -23,5 +24,6 @@ public class DeliveryMethod {
 
     @Column(name = "tariff")
     private int tariff;
+
 }
 

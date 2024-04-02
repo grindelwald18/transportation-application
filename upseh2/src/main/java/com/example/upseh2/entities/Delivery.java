@@ -9,13 +9,15 @@ import lombok.Setter;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+
 @Entity
 @Table(name = "deliveries")
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Delivere {
+public class Delivery {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -49,4 +51,5 @@ public class Delivere {
     @OneToMany
     @JoinColumn(name = "cargo_id")
     private List<Cargo> cargo;
+
 }

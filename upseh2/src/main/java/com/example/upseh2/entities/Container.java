@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity
 @Table(name = "containers")
 @Getter
@@ -13,6 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Container {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -24,7 +26,7 @@ public class Container {
     private int containerWidth;
 
     @Column(name = "container_height")
-    private int cocontainerHeight;
+    private int containerHeight;
 
     @OneToOne
     @PrimaryKeyJoinColumn
@@ -36,4 +38,5 @@ public class Container {
 
     @Column(name = "cargo_amount")
     private int cargoAmount;
+
 }
