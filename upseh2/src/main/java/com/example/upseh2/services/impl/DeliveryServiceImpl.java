@@ -13,29 +13,29 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DeliveryServiceImpl implements DeliveryService {
 
-    private final DeliveryRepository DeliveryRepository;
+    private final DeliveryRepository deliveryRepository;
 
 
     @Override
     public Page<Delivery> getDelivery(Pageable pageable) {
-        return DeliveryRepository.findAll(pageable);    
+        return deliveryRepository.findAll(pageable);
     }
 
     public Delivery addDelivery(Delivery delivery) {
-        return DeliveryRepository.save(delivery);
+        return deliveryRepository.save(delivery);
     }
 
     public void delDelivery(long id) {
-        DeliveryRepository.deleteById(id);
+        deliveryRepository.deleteById(id);
     }
 
     public Delivery updateDelivery(long id, Delivery updateDelivery){
         updateDelivery.setId(id);
-        return DeliveryRepository.save(updateDelivery);
+        return deliveryRepository.save(updateDelivery);
     }
 
     public Delivery findById (long id) {
-        return DeliveryRepository.findById(id).orElseThrow();
+        return deliveryRepository.findById(id).orElseThrow();
     }
 
 }

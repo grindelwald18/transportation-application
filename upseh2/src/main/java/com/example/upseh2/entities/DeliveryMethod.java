@@ -21,7 +21,7 @@ public class DeliveryMethod {
 
     @Column(name = "method")
     private String method;
-
+ 
     @Column(name = "tariff")
     private int tariff;
 
