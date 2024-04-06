@@ -1,6 +1,8 @@
 package com.example.upseh2.services.impl;
 
+import com.example.upseh2.dtos.DeliveryMethodDTO;
 import com.example.upseh2.entities.DeliveryMethod;
+import com.example.upseh2.mappers.DeliveryMethodMapper;
 import com.example.upseh2.repositories.DeliveryMethodRepository;
 import com.example.upseh2.services.DeliveryMethodService;
 import lombok.RequiredArgsConstructor;
@@ -13,27 +15,30 @@ import org.springframework.stereotype.Service;
 public class DeliveryMethodServiceImpl implements DeliveryMethodService {
 
     private final DeliveryMethodRepository deliveryMethodRepository;
-
-    public Page<DeliveryMethod> getDeliveryMethod(Pageable pageable) {
-        return deliveryMethodRepository.findAll(pageable);
+    private final DeliveryMethodMapper deliveryMethodMapper;
+    public Page<DeliveryMethodDTO> getDeliveryMethod(Pageable pageable) {
+        return deliveryMethodRepository.findAll(pageable)
+                .map(deliveryMethodMapper::toDeliveryMethodDTO);
     }
 
-    public DeliveryMethod addDeliveryMethod(DeliveryMethod deliveryMethod) {
-        return deliveryMethodRepository.save(deliveryMethod);
+    public DeliveryMethodDTO addDeliveryMethod(DeliveryMethod deliveryMethod) {
+        return deliveryMethodMapper.toDeliveryMethodDTO(deliveryMethodRepository.save(deliveryMethod));
     }
 
     public void delDeliveryMethod(long id) {
         deliveryMethodRepository.deleteById(id);
     }
 
-    public DeliveryMethod updateDeliveryMethod(long id, DeliveryMethod updareDeliveryMethod) {
+    public DeliveryMethodDTO updateDeliveryMethod(long id, DeliveryMethod updareDeliveryMethod) {
         updareDeliveryMethod.setId(id);
-        return deliveryMethodRepository.save(updareDeliveryMethod);
+        return deliveryMethodMapper.toDeliveryMethodDTO(deliveryMethodRepository.save(updareDeliveryMethod));
 
     }
 
-    public DeliveryMethod findById(long id) {
-        return deliveryMethodRepository.findById(id).orElseThrow();
+    public DeliveryMethodDTO findById(long id) {
+        return deliveryMethodRepository.findById(id)
+                .map(deliveryMethodMapper::toDeliveryMethodDTO)
+                .orElseThrow();
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.upseh2.services.impl;
 
+import com.example.upseh2.dtos.TransportDTO;
 import com.example.upseh2.entities.Transport;
+import com.example.upseh2.mappers.TransportMapper;
 import com.example.upseh2.repositories.TransportRepository;
 import com.example.upseh2.services.TransportService;
 import lombok.RequiredArgsConstructor;
@@ -13,25 +15,28 @@ import org.springframework.stereotype.Service;
 public class TransportServiceImpl implements TransportService {
 
     private  final TransportRepository transportRepository;
-
-    public Page<Transport> getAllTransports(Pageable pageable) {
-        return transportRepository.findAll(pageable);
+    private final TransportMapper transportMapper;
+    public Page<TransportDTO> getAllTransports(Pageable pageable) {
+        return transportRepository.findAll(pageable)
+                .map(transportMapper::toTransportDTO);
     }
 
-    public Transport addTransport(Transport transport) {
-        return transportRepository.save(transport);
+    public TransportDTO addTransport(Transport transport) {
+        return transportMapper.toTransportDTO(transportRepository.save(transport));
     }
 
     public void delTransport(long id) {
         transportRepository.deleteById(id);
     }
 
-    public Transport updateTransport(long id, Transport newTransport) {
+    public TransportDTO updateTransport(long id, Transport newTransport) {
         newTransport.setId(id);
-        return transportRepository.save(newTransport);
+        return transportMapper.toTransportDTO(transportRepository.save(newTransport));
     }
 
-    public Transport findById(long id) {
-        return transportRepository.findById(id).orElseThrow();
+    public TransportDTO findById(long id) {
+        return transportRepository.findById(id)
+                .map(transportMapper::toTransportDTO)
+                .orElseThrow();
     }
 }

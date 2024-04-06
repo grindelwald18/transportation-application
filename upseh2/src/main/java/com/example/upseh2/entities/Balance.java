@@ -4,7 +4,6 @@ package com.example.upseh2.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 
 
 @Entity
@@ -17,10 +16,10 @@ public class Balance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "balance", nullable = false)
-    private BigDecimal balance;
+    private long balance;
 
 
 }

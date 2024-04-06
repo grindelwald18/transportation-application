@@ -1,6 +1,8 @@
 package com.example.upseh2.services.impl;
 
+import com.example.upseh2.dtos.DeliveryDTO;
 import com.example.upseh2.entities.Delivery;
+import com.example.upseh2.mappers.DeliveryMapper;
 import com.example.upseh2.repositories.DeliveryRepository;
 import com.example.upseh2.services.DeliveryService;
 import lombok.RequiredArgsConstructor;
@@ -14,28 +16,30 @@ import org.springframework.stereotype.Service;
 public class DeliveryServiceImpl implements DeliveryService {
 
     private final DeliveryRepository deliveryRepository;
+    private final DeliveryMapper deliveryMapper;
 
-
-    @Override
-    public Page<Delivery> getDelivery(Pageable pageable) {
-        return deliveryRepository.findAll(pageable);
+    public Page<DeliveryDTO> getDelivery(Pageable pageable) {
+        return deliveryRepository.findAll(pageable)
+                .map(deliveryMapper::toDeliveryDTO);
     }
 
-    public Delivery addDelivery(Delivery delivery) {
-        return deliveryRepository.save(delivery);
+    public DeliveryDTO addDelivery(Delivery delivery) {
+        return deliveryMapper.toDeliveryDTO(deliveryRepository.save(delivery));
     }
 
     public void delDelivery(long id) {
         deliveryRepository.deleteById(id);
     }
 
-    public Delivery updateDelivery(long id, Delivery updateDelivery){
+    public DeliveryDTO updateDelivery(long id, Delivery updateDelivery){
         updateDelivery.setId(id);
-        return deliveryRepository.save(updateDelivery);
+        return deliveryMapper.toDeliveryDTO(deliveryRepository.save(updateDelivery));
     }
 
-    public Delivery findById (long id) {
-        return deliveryRepository.findById(id).orElseThrow();
+    public DeliveryDTO findById (long id) {
+        return deliveryRepository.findById(id)
+                .map(deliveryMapper::toDeliveryDTO)
+                .orElseThrow();
     }
 
 }

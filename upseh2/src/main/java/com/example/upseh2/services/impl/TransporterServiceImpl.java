@@ -1,6 +1,8 @@
 package com.example.upseh2.services.impl;
 
+import com.example.upseh2.dtos.TransporterDTO;
 import com.example.upseh2.entities.Transporter;
+import com.example.upseh2.mappers.TransporterMapper;
 import com.example.upseh2.repositories.TransporterRepository;
 import com.example.upseh2.services.TransportService;
 import com.example.upseh2.services.TransporterService;
@@ -13,27 +15,31 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TransporterServiceImpl implements TransporterService {
 
-    public final TransporterRepository transporterRepository;
+    private final TransporterRepository transporterRepository;
+    private final TransporterMapper transporterMapper;
 
-    public Page<Transporter> getAllTransporters(Pageable pageable) {
-        return transporterRepository.findAll(pageable);
+    public Page<TransporterDTO> getAllTransporters(Pageable pageable) {
+        return transporterRepository.findAll(pageable)
+                .map(transporterMapper::toTransporterDTO);
     }
 
-    public Transporter addTransporter(Transporter transporter) {
-        return transporterRepository.save(transporter);
+    public TransporterDTO addTransporter(Transporter transporter) {
+        return transporterMapper.toTransporterDTO(transporterRepository.save(transporter));
     }
 
     public void delTransporter(long id) {
         transporterRepository.deleteById(id);
     }
 
-    public Transporter updateTransporter(long id, Transporter newTransporter) {
+    public TransporterDTO updateTransporter(long id, Transporter newTransporter) {
         newTransporter.setId(id);
-        return transporterRepository.save(newTransporter);
+        return transporterMapper.toTransporterDTO(transporterRepository.save(newTransporter));
     }
 
-    public Transporter findById(long id) {
-        return transporterRepository.findById(id).orElseThrow();
+    public TransporterDTO findById(long id) {
+        return transporterRepository.findById(id)
+                .map(transporterMapper::toTransporterDTO)
+                .orElseThrow();
     }
 
 }

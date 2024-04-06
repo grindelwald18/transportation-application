@@ -1,5 +1,6 @@
 package com.example.upseh2.services;
 
+import com.example.upseh2.dtos.BalanceDTO;
 import com.example.upseh2.entities.Balance;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,14 +8,14 @@ import org.springframework.data.domain.Pageable;
 
 public interface BalanceService {
 
-    Page<Balance> getBalances(Pageable pageable);
+    Page<BalanceDTO> getBalances(Pageable pageable);
 
-    Balance addBalance(Balance balance);
+    BalanceDTO addBalance(BalanceDTO balanceDTO);
 
     void deleteBalance(long id);
 
-    void updateBalance(long id, Balance updateBalance);
+    BalanceDTO updateBalance(long id, BalanceDTO updateBalanceDTO);
 
-    Balance findById(Long id);
+    BalanceDTO findById(Long id);
 
 }

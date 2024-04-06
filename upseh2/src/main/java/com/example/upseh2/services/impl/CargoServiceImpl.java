@@ -1,6 +1,8 @@
 package com.example.upseh2.services.impl;
 
+import com.example.upseh2.dtos.CargoDTO;
 import com.example.upseh2.entities.Cargo;
+import com.example.upseh2.mappers.CargoMapper;
 import com.example.upseh2.repositories.CargoRepository;
 import com.example.upseh2.services.CargoService;
 import lombok.RequiredArgsConstructor;
@@ -12,23 +14,27 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CargoServiceImpl implements CargoService {
     private final CargoRepository cargoRepository;
+    private final CargoMapper cargoMapper;
 
-    public Page<Cargo> getCargos(Pageable pageable) {
-        return cargoRepository.findAll(pageable);
+    public Page<CargoDTO> getCargos(Pageable pageable) {
+        return cargoRepository.findAll(pageable)
+                .map(cargoMapper::toCargoDTO);
     }
-    public Cargo addCargo(Cargo cargo){
+    public CargoDTO addCargo(Cargo cargo){
         cargoRepository.save(cargo);
-        return cargo;
+        return cargoMapper.toCargoDTO(cargo);
     }
     public void delCargo(long id){
         cargoRepository.deleteById(id);
     }
-    public Cargo updateCargo(long id, Cargo updateCargo){
+    public CargoDTO updateCargo(long id, Cargo updateCargo){
         updateCargo.setId(id);
-        cargoRepository.save(updateCargo);
-        return updateCargo;
+
+        return cargoMapper.toCargoDTO(cargoRepository.save(updateCargo));
     }
-    public Cargo findCargoById(long id){
-        return cargoRepository.findById(id).orElseThrow();
+    public CargoDTO findCargoById(long id){
+        return cargoRepository.findById(id)
+                .map(cargoMapper::toCargoDTO)
+                .orElseThrow();
     }
 }

@@ -1,7 +1,9 @@
 package com.example.upseh2.services.impl;
 
+import com.example.upseh2.dtos.RoleDTO;
 import com.example.upseh2.entities.Delivery;
 import com.example.upseh2.entities.Role;
+import com.example.upseh2.mappers.RoleMapper;
 import com.example.upseh2.repositories.RoleRepository;
 import com.example.upseh2.services.RoleService;
 import lombok.RequiredArgsConstructor;
@@ -15,25 +17,29 @@ import org.springframework.stereotype.Service;
 public class RoleServiceImpl implements RoleService {
 
     private final  RoleRepository roleRepository;
+    private final RoleMapper roleMapper;
 
-    public Page<Role> getAllRoles(Pageable pageable) {
-        return roleRepository.findAll(pageable);
+    public Page<RoleDTO> getAllRoles(Pageable pageable) {
+        return roleRepository.findAll(pageable)
+                .map(roleMapper::toRoleDTO);
     }
 
-    public Role addRole (Role role) {
-        return roleRepository.save(role);
+    public RoleDTO addRole (Role role) {
+        return roleMapper.toRoleDTO(roleRepository.save(role));
     }
 
     public void delRole(long id) {
         roleRepository.deleteById(id);
     }
 
-    public Role updateRole(long id, Role newRole) {
+    public RoleDTO updateRole(long id, Role newRole) {
         newRole.setId(id);
-        return  roleRepository.save(newRole);
+        return roleMapper.toRoleDTO(roleRepository.save(newRole));
     }
 
-    public Role findById (long id) {
-        return roleRepository.findById(id).orElseThrow();
+    public RoleDTO findById (long id) {
+        return roleRepository.findById(id)
+                .map(roleMapper::toRoleDTO)
+                .orElseThrow();
     }
 }
