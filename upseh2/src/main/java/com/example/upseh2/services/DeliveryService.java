@@ -7,13 +7,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface DeliveryService {
-    Page<DeliveryDTO> getDelivery(Pageable pageable);
+    Page<Delivery> getDelivery(Pageable pageable);
 
-    DeliveryDTO addDelivery(Delivery delivery);
+    Delivery addDelivery(DeliveryDTO deliveryDTO);
 
     void delDelivery(long id);
 
-    DeliveryDTO updateDelivery(long id, Delivery updateDelivery);
+    Delivery updateDelivery(long id, DeliveryDTO updateDeliveryDTO);
 
-    DeliveryDTO findById(long id);
+    Delivery findById(long id);
 }

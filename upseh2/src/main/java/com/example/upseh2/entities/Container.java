@@ -1,10 +1,14 @@
 package com.example.upseh2.entities;
 
+import com.example.upseh2.dtos.DeliveryItemIdDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 
 @Entity
@@ -19,24 +23,16 @@ public class Container {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "container_length")
-    private int containerLength;
+    private final int containerLength = 500;
 
-    @Column(name = "container_width")
-    private int containerWidth;
+    private final int containerWidth = 200;
 
-    @Column(name = "container_height")
-    private int containerHeight;
+    private final int containerHeight = 250;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private DeliveryMethod deliveryMethod;
-
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "cargo_id")
-    private Cargo cargo;
+    private Delivery delivery;
 
-    @Column(name = "cargo_amount")
-    private int cargoAmount;
-
+    @OneToMany(mappedBy = "container", cascade = CascadeType.ALL)
+    private List<DeliveryItem> deliveryItems;
 }

@@ -13,19 +13,20 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Transport {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "delivery_method_id")
     private DeliveryMethod deliveryMethod;
 
     @Column(name = "capacity")
     private int capacity;
 
     @Column(name = "speed")
-    private int speed;
+    private long speed;
 
     @Column(name = "transport_name")
     private String transportName;
@@ -33,4 +34,5 @@ public class Transport {
     @ManyToOne
     @JoinColumn(name = "transporter_id")
     private Transporter transporter;
+
 }

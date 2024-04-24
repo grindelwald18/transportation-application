@@ -8,6 +8,7 @@ public class CargoDTO {
     private int length;
     private int width;
     private int height;
-    private int weight;
-
+    private long weight;
+    private String name;
+    private boolean nature;
 }

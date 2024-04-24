@@ -10,10 +10,10 @@ public interface RoleService {
 
     Page<RoleDTO> getAllRoles(Pageable pageable);
 
-    RoleDTO addRole(Role role);
+    RoleDTO addRole(RoleDTO roleDTO);
     void delRole(long id);
 
-    RoleDTO updateRole(long id, Role updateRole);
+    RoleDTO updateRole(long id, RoleDTO updateRoleDTO);
 
     RoleDTO findById(long id);
 }

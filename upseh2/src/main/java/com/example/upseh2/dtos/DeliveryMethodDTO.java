@@ -10,5 +10,5 @@ public class DeliveryMethodDTO {
 
     private String method;
 
-    private int tariff;
+    private long tariff;
 }

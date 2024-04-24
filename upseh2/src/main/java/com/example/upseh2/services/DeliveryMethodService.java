@@ -8,11 +8,11 @@ import org.springframework.data.domain.Pageable;
 public interface DeliveryMethodService {
     Page<DeliveryMethodDTO> getDeliveryMethod(Pageable pageable);
 
-    DeliveryMethodDTO addDeliveryMethod(DeliveryMethod deliveryMethod);
+    DeliveryMethodDTO addDeliveryMethod(DeliveryMethodDTO deliveryMethodDTO);
 
     void delDeliveryMethod(long id);
 
-    DeliveryMethodDTO updateDeliveryMethod(long id, DeliveryMethod deliveryMethod);
+    DeliveryMethodDTO updateDeliveryMethod(long id, DeliveryMethodDTO deliveryMethodDTO);
 
     DeliveryMethodDTO findById(long id);
 }

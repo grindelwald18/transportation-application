@@ -7,5 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface CargoMapper {
     Cargo toCargo(CargoDTO cargoDTO);
+
     CargoDTO toCargoDTO(Cargo cargo);
 }

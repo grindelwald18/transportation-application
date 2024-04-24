@@ -11,6 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.NoSuchElementException;
+
 
 @Service
 @RequiredArgsConstructor
@@ -25,25 +28,24 @@ public class BalanceServiceImpl implements BalanceService {
                 .map(balanceMapper::toBalanceDTO);
     }
 
-    public BalanceDTO addBalance(BalanceDTO balanceDTO) {
-        Balance balance = balanceMapper.toBalance(balanceDTO);
-        balanceRepository.save(balance);
-        return balanceMapper.toBalanceDTO(balance);
+    public Balance addBalance(BigDecimal initialBalance) {
+        Balance balance = new Balance(initialBalance);
+        return balanceRepository.save(balance);
     }
 
     public void deleteBalance(long id) {
         balanceRepository.deleteById(id);
     }
 
-    public BalanceDTO updateBalance(long id, BalanceDTO updateBalanceDTO) {
-        Balance updateBalance = balanceMapper.toBalance(updateBalanceDTO);
-        updateBalance.setId(id);
-        return balanceMapper.toBalanceDTO(balanceRepository.save(updateBalance));
+    public Balance updateBalance(long id, BigDecimal updateBalance) {
+        Balance balance = balanceRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Balance with id " + id + " not found"));
+        balance.setBalance(updateBalance);
+        return balanceRepository.save(balance);
     }
 
-    public BalanceDTO findById(Long id) {
+    public Balance findById(Long id) {
         return balanceRepository.findById(id)
-                .map(balanceMapper::toBalanceDTO)
                 .orElseThrow();
     }
 }

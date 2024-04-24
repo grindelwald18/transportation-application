@@ -8,14 +8,14 @@ import org.springframework.data.domain.Pageable;
 
 public interface ContainerService {
 
-    Page<ContainerDTO> getContainers(Pageable pageable);
+    Page<Container> getContainers(Pageable pageable);
 
-    ContainerDTO addContainer(Container container);
+    Container addContainer(ContainerDTO containerDTO);
 
     void delContainer(long id);
 
-    ContainerDTO updateContainer(long id, Container updateContainer);
+    Container updateContainer(long id, ContainerDTO updateContainerDTO);
 
-    ContainerDTO findById(long id);
+    Container findById(long id);
 
 }

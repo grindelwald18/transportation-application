@@ -21,7 +21,8 @@ public class DeliveryMethodServiceImpl implements DeliveryMethodService {
                 .map(deliveryMethodMapper::toDeliveryMethodDTO);
     }
 
-    public DeliveryMethodDTO addDeliveryMethod(DeliveryMethod deliveryMethod) {
+    public DeliveryMethodDTO addDeliveryMethod(DeliveryMethodDTO deliveryMethodDTO) {
+        DeliveryMethod deliveryMethod = deliveryMethodMapper.toDeliveryMethod(deliveryMethodDTO);
         return deliveryMethodMapper.toDeliveryMethodDTO(deliveryMethodRepository.save(deliveryMethod));
     }
 
@@ -29,7 +30,8 @@ public class DeliveryMethodServiceImpl implements DeliveryMethodService {
         deliveryMethodRepository.deleteById(id);
     }
 
-    public DeliveryMethodDTO updateDeliveryMethod(long id, DeliveryMethod updareDeliveryMethod) {
+    public DeliveryMethodDTO updateDeliveryMethod(long id, DeliveryMethodDTO updareDeliveryMethodDTO) {
+        DeliveryMethod updareDeliveryMethod = deliveryMethodMapper.toDeliveryMethod(updareDeliveryMethodDTO);
         updareDeliveryMethod.setId(id);
         return deliveryMethodMapper.toDeliveryMethodDTO(deliveryMethodRepository.save(updareDeliveryMethod));
 

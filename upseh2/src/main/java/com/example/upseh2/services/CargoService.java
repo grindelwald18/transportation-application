@@ -9,12 +9,12 @@ public interface CargoService {
 
     Page<CargoDTO> getCargos(Pageable pageable);
 
-    CargoDTO addCargo(Cargo cargo);
+    CargoDTO addCargo(CargoDTO cargoDTO);
 
     void delCargo(long id);
 
-    CargoDTO updateCargo(long id, Cargo updateCargo);
+    CargoDTO updateCargo(long id, CargoDTO updateCargoDTO);
 
-    CargoDTO findCargoById(long id);
+    CargoDTO findById(long id);
 
 }

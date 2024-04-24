@@ -1,7 +1,10 @@
 package com.example.upseh2.dtos;
 
 
+import com.example.upseh2.entities.Auth;
 import lombok.Data;
+
+import java.math.BigDecimal;
 
 @Data
 public class ClientDTO {
@@ -10,11 +13,7 @@ public class ClientDTO {
 
     private String surname;
 
-    private String email;
+    private BigDecimal balance;
 
-    private String password;
-
-    private long balanceId;
-
-    private long roleId;
+    private Auth auth;
 }

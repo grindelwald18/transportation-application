@@ -8,11 +8,11 @@ import org.springframework.data.domain.Pageable;
 public interface ClientService {
     Page<ClientDTO> getClients(Pageable pageable);
 
-    ClientDTO addClient(Client client);
+    ClientDTO addClient(ClientDTO clientDTO);
 
     void delClient(long id);
 
-    ClientDTO updateClient(long id, Client updateClient);
+    ClientDTO updateClient(long id, ClientDTO updateClientDTO);
 
     ClientDTO findById(long id);
 }

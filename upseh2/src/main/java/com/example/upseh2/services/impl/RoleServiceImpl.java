@@ -24,7 +24,8 @@ public class RoleServiceImpl implements RoleService {
                 .map(roleMapper::toRoleDTO);
     }
 
-    public RoleDTO addRole (Role role) {
+    public RoleDTO addRole (RoleDTO roleDTO) {
+        Role role = roleMapper.toRole(roleDTO);
         return roleMapper.toRoleDTO(roleRepository.save(role));
     }
 
@@ -32,7 +33,8 @@ public class RoleServiceImpl implements RoleService {
         roleRepository.deleteById(id);
     }
 
-    public RoleDTO updateRole(long id, Role newRole) {
+    public RoleDTO updateRole(long id, RoleDTO newRoleDTO) {
+        Role newRole = roleMapper.toRole(newRoleDTO);
         newRole.setId(id);
         return roleMapper.toRoleDTO(roleRepository.save(newRole));
     }

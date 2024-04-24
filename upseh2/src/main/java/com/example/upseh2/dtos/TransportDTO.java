@@ -11,7 +11,7 @@ public class TransportDTO {
 
     private int capacity;
 
-    private int speed;
+    private long speed;
 
     private String transportName;
 

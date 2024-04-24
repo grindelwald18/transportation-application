@@ -8,11 +8,11 @@ import org.springframework.data.domain.Pageable;
 public interface TransporterService {
     Page<TransporterDTO> getAllTransporters(Pageable pageable);
 
-    TransporterDTO addTransporter(Transporter newTransport);
+    TransporterDTO addTransporter(TransporterDTO transporterDTO);
 
     void delTransporter(long id);
 
-    TransporterDTO updateTransporter(long id, Transporter newTransport);
+    TransporterDTO updateTransporter(long id, TransporterDTO newTransporterDTO);
 
     TransporterDTO findById(long id);
 }

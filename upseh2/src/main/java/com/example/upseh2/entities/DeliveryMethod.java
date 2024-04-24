@@ -23,7 +23,6 @@ public class DeliveryMethod {
     private String method;
  
     @Column(name = "tariff")
-    private int tariff;
+    private long tariff;
 
 }
-

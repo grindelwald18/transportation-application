@@ -7,5 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface BalanceMapper {
     Balance toBalance(BalanceDTO balanceDTO);
+
     BalanceDTO toBalanceDTO(Balance balance);
 }

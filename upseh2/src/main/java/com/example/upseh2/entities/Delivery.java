@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -29,27 +30,29 @@ public class Delivery {
     private String finalPoint;
 
     @Column(name = "distance")
-    private int distance;
+    private long distance;
 
     @Column(name = "send_time")
     private ZonedDateTime sendTime;
 
+    @Column(name = "travel_time")
+    private int travelTime;
+
     @Column(name = "price")
-    private int price;
+    private BigDecimal price;
 
     @Column(name = "status")
     private String status;
 
     @ManyToOne
-    @JoinColumn(name="client_id")
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @ManyToOne
-    @JoinColumn(name="transport_id")
+    @JoinColumn(name = "transport_id")
     private Transport transport;
 
-    @OneToMany
-    @JoinColumn(name = "cargo_id")
-    private List<Cargo> cargo;
+    @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
+    private List<Container> container;
 
 }

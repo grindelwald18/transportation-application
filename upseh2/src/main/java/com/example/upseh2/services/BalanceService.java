@@ -5,17 +5,19 @@ import com.example.upseh2.entities.Balance;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.math.BigDecimal;
+
 
 public interface BalanceService {
 
     Page<BalanceDTO> getBalances(Pageable pageable);
 
-    BalanceDTO addBalance(BalanceDTO balanceDTO);
+    Balance addBalance(BigDecimal balance);
 
     void deleteBalance(long id);
 
-    BalanceDTO updateBalance(long id, BalanceDTO updateBalanceDTO);
+    Balance updateBalance(long id, BigDecimal balance);
 
-    BalanceDTO findById(Long id);
+    Balance findById(Long id);
 
 }

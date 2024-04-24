@@ -1,8 +1,12 @@
 package com.example.upseh2.dtos;
 
+import com.example.upseh2.entities.Cargo;
+import com.example.upseh2.entities.Container;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Data
 public class DeliveryDTO {
@@ -12,11 +16,13 @@ public class DeliveryDTO {
 
     private String finalPoint;
 
-    private int distance;
+    private long distance;
 
     private ZonedDateTime sendTime;
 
-    private int price;
+    private int travelTime;
+
+    private BigDecimal price;
 
     private String status;
 
@@ -24,5 +30,5 @@ public class DeliveryDTO {
 
     private long transportId;
 
-    private long cargoId;
+    private List<ContainerIdDTO> container;
 }

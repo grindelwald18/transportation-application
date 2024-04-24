@@ -1,18 +1,25 @@
 package com.example.upseh2.entities;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "clients")
 @Getter
 @Setter
+@Builder
 @EqualsAndHashCode
 @NoArgsConstructor
-public class Client {
+@AllArgsConstructor
+@Accessors(chain = true)
+public class Client implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,17 +28,47 @@ public class Client {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "email", nullable = false)
-    private String email;
-
-    @Column(name = "password")
-    private String password;
-
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "balance_id")
     private Balance balance;
 
-    @ManyToOne
-    @JoinColumn(name="role_id")
-    private Role role;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "authentication")
+    private Auth authentication;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("CLIENT"));
+    }
+
+    @Override
+    public String getPassword() {
+        return authentication.getPassword();
+    }
+
+    @Override
+    public String getUsername() {
+        return authentication.getLogin();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 }

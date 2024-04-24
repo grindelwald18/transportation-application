@@ -4,6 +4,8 @@ package com.example.upseh2.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.util.List;
 
 
 @Entity
@@ -14,12 +16,16 @@ import lombok.*;
 @NoArgsConstructor
 public class Balance {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "balance", nullable = false)
-    private long balance;
+    private BigDecimal balance;
 
+    public Balance(BigDecimal balance) {
+        this.balance = balance;
+    }
 
 }

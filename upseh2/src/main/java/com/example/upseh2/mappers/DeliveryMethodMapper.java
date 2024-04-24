@@ -7,5 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface DeliveryMethodMapper {
     DeliveryMethod toDeliveryMethod(DeliveryMethodDTO deliveryMethodDTO);
+
     DeliveryMethodDTO toDeliveryMethodDTO(DeliveryMethod deliveryMethod);
 }

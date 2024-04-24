@@ -2,14 +2,16 @@ package com.example.upseh2.services.impl;
 
 import com.example.upseh2.dtos.TransportDTO;
 import com.example.upseh2.entities.Transport;
+import com.example.upseh2.entities.Transporter;
 import com.example.upseh2.mappers.TransportMapper;
 import com.example.upseh2.repositories.TransportRepository;
 import com.example.upseh2.services.TransportService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TransportServiceImpl implements TransportService {
@@ -21,7 +23,9 @@ public class TransportServiceImpl implements TransportService {
                 .map(transportMapper::toTransportDTO);
     }
 
-    public TransportDTO addTransport(Transport transport) {
+    public TransportDTO addTransport(TransportDTO transportDTO) {
+        log.info("transport speed {}", transportDTO.getSpeed());
+        Transport transport = transportMapper.toTransport(transportDTO);
         return transportMapper.toTransportDTO(transportRepository.save(transport));
     }
 
@@ -29,7 +33,8 @@ public class TransportServiceImpl implements TransportService {
         transportRepository.deleteById(id);
     }
 
-    public TransportDTO updateTransport(long id, Transport newTransport) {
+    public TransportDTO updateTransport(long id, TransportDTO newTransportDTO) {
+        Transport newTransport = transportMapper.toTransport(newTransportDTO);
         newTransport.setId(id);
         return transportMapper.toTransportDTO(transportRepository.save(newTransport));
     }
