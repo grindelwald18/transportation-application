@@ -2,7 +2,6 @@ package com.example.upseh2.services.impl;
 
 import com.example.upseh2.dtos.TransportDTO;
 import com.example.upseh2.entities.Transport;
-import com.example.upseh2.entities.Transporter;
 import com.example.upseh2.mappers.TransportMapper;
 import com.example.upseh2.repositories.TransportRepository;
 import com.example.upseh2.services.TransportService;

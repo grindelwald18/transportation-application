@@ -32,6 +32,10 @@ public class Client implements UserDetails{
     @JoinColumn(name = "balance_id")
     private Balance balance;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "authentication")
     private Auth authentication;

@@ -26,7 +26,7 @@ public class BalanceController {
 //    public BalanceDTO getBalanceById(@PathVariable long id){
 //        return balanceService.findById(id);
 //    }
-
+//
 //    @PostMapping
 //    @ResponseStatus(HttpStatus.CREATED)
 //    public BalanceDTO addBalance(@RequestBody BalanceDTO balanceDTO) {

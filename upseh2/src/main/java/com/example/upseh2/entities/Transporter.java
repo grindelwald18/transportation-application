@@ -1,10 +1,8 @@
 package com.example.upseh2.entities;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.Accessors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +14,11 @@ import java.util.List;
 @Table(name = "transporters")
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
 public class Transporter implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +32,10 @@ public class Transporter implements UserDetails {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "authentication")

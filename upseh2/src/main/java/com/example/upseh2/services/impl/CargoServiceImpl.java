@@ -24,7 +24,6 @@ public class CargoServiceImpl implements CargoService {
 
     public CargoDTO addCargo(CargoDTO cargoDTO) {
         Cargo cargo = cargoMapper.toCargo(cargoDTO);
-        log.info("sdasdas {}", cargo.getWeight());
         cargoRepository.save(cargo);
         return cargoMapper.toCargoDTO(cargo);
     }
