@@ -16,19 +16,19 @@ public class DeliveryDTO {
 
     private String finalPoint;
 
-    private long distance;
-
-    private ZonedDateTime sendTime;
-
-    private int travelTime;
-
-    private BigDecimal price;
-
-    private String status;
-
-    private long clientId;
+    private int distance;
 
     private long transportId;
 
-    private List<ContainerIdDTO> container;
+    private int weight;
+
+    private int amount;
+
+    private int length;
+
+    private int height;
+
+    private int width;
+
+    private String name;
 }

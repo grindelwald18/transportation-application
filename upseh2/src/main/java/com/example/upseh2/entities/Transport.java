@@ -1,5 +1,6 @@
 package com.example.upseh2.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,8 +32,8 @@ public class Transport {
     @Column(name = "transport_name")
     private String transportName;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "transporter_id")
     private Transporter transporter;
 
 }

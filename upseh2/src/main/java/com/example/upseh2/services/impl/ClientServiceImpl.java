@@ -13,8 +13,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Slf4j
@@ -83,5 +85,12 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findById(id)
                 .map(clientMapper::toClientDTO)
                 .orElseThrow();
+    }
+
+    public Client findByLogin(UserDetails userDetails) {
+        Auth auth = authRepository.findByLogin(userDetails.getUsername());
+        long longValue = auth.getId();
+        return clientRepository.findById(longValue)
+                .orElseThrow(() -> new NoSuchElementException("Client not found for login: " + auth));
     }
 }

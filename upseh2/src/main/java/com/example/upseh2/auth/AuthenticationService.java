@@ -78,6 +78,10 @@ public class AuthenticationService {
                 .companyName(request.getCompanyName())
                 .logo(request.getLogo())
                 .phoneNumber(request.getPhoneNumber())
+                .rating(request.getRating())
+                .experience(request.getExperience())
+                .numberEmployees(request.getNumberEmployees())
+                .description(request.getDescription())
                 .authentication(userAuth)
                 .role(Role.TRANSPORTER)
                 .build();

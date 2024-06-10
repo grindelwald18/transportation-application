@@ -2,6 +2,7 @@ package com.example.upseh2.services.impl;
 
 import com.example.upseh2.dtos.TransporterDTO;
 import com.example.upseh2.entities.Auth;
+import com.example.upseh2.entities.Transport;
 import com.example.upseh2.entities.Transporter;
 import com.example.upseh2.mappers.TransporterMapper;
 import com.example.upseh2.repositories.AuthRepository;
@@ -14,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TransporterServiceImpl implements TransporterService {
@@ -22,9 +25,8 @@ public class TransporterServiceImpl implements TransporterService {
     private final TransporterMapper transporterMapper;
     private final AuthRepository authRepository;
 
-    public Page<TransporterDTO> getAllTransporters(Pageable pageable) {
-        return transporterRepository.findAll(pageable)
-                .map(transporterMapper::toTransporterDTO);
+    public Page<Transporter> getAllTransporters(Pageable pageable) {
+        return transporterRepository.findAll(pageable);
     }
 
     public TransporterDTO addTransporter(TransporterDTO transporterDTO) {
@@ -44,16 +46,19 @@ public class TransporterServiceImpl implements TransporterService {
         transporterRepository.deleteById(id);
     }
 
-    public TransporterDTO updateTransporter(long id, TransporterDTO newTransporterDTO) {
+    public Transporter updateTransporter(long id, TransporterDTO newTransporterDTO) {
         Transporter newTransporter = transporterMapper.toTransporter(newTransporterDTO);
         newTransporter.setId(id);
-        return transporterMapper.toTransporterDTO(transporterRepository.save(newTransporter));
+        return transporterRepository.save(newTransporter);
     }
 
-    public TransporterDTO findById(long id) {
-        return transporterRepository.findById(id)
-                .map(transporterMapper::toTransporterDTO)
-                .orElseThrow();
+    public Transporter findById(long id) {
+        return transporterRepository.findById(id).orElseThrow();
     }
 
+
+    public List<Transport> getTransportsList(long id){
+        List<Transport> transports = transporterRepository.findById(id).get().getTransports();
+        return  transports;
+    }
 }

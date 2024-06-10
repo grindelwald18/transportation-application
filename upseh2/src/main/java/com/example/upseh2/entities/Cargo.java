@@ -1,16 +1,14 @@
 package com.example.upseh2.entities;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "cargos")
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 public class Cargo {
 
@@ -36,4 +34,12 @@ public class Cargo {
     @Column(name = "nature")
     private boolean nature;
 
+    public Cargo(int length, int width, int height, int weight, String name, boolean b) {
+        this.length = length;
+        this.width = width;
+        this.height = height;
+        this.weight = weight;
+        this.name = name;
+        this.nature = b;
+    }
 }

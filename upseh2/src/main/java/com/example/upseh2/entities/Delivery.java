@@ -30,13 +30,7 @@ public class Delivery {
     private String finalPoint;
 
     @Column(name = "distance")
-    private long distance;
-
-    @Column(name = "send_time")
-    private ZonedDateTime sendTime;
-
-    @Column(name = "travel_time")
-    private int travelTime;
+    private int distance;
 
     @Column(name = "price")
     private BigDecimal price;

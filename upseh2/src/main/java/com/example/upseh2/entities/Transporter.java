@@ -33,6 +33,22 @@ public class Transporter implements UserDetails {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "experience")
+    private String experience;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "rating")
+    private String rating;
+
+    @Column(name = "number_employees")
+    private int numberEmployees;
+
+    @OneToMany(mappedBy = "transporter", cascade = CascadeType.ALL)
+    private List<Transport> transports;
+
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;

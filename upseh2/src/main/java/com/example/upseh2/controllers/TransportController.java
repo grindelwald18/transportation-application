@@ -1,6 +1,7 @@
 package com.example.upseh2.controllers;
 
 import com.example.upseh2.dtos.TransportDTO;
+import com.example.upseh2.entities.Transport;
 import com.example.upseh2.services.TransportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,7 +29,7 @@ public class TransportController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TransportDTO addTransport(@RequestBody TransportDTO TransportDTO) {
+    public Transport addTransport(@RequestBody TransportDTO TransportDTO) {
         return transportService.addTransport(TransportDTO);
     }
 

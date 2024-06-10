@@ -17,5 +17,9 @@ public class RegisterRequestTransporter {
     private String companyName;
     private String logo;
     private String phoneNumber;
+    private String experience;
+    private String description;
+    private String rating;
+    private int numberEmployees;
     private Auth auth;
 }

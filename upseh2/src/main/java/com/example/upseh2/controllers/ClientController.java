@@ -1,11 +1,15 @@
 package com.example.upseh2.controllers;
 
 import com.example.upseh2.dtos.ClientDTO;
+import com.example.upseh2.dtos.RequestData;
+import com.example.upseh2.entities.Client;
 import com.example.upseh2.services.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -43,5 +47,11 @@ public class ClientController {
     @ResponseStatus(HttpStatus.OK)
     public ClientDTO updateClient(@PathVariable long id, @RequestBody ClientDTO clientDTO) {
         return clientService.updateClient(id, clientDTO);
+    }
+
+    @GetMapping("/find")
+    @ResponseStatus(HttpStatus.OK)
+    public Client findByLogin(@AuthenticationPrincipal UserDetails userDetails) {
+        return clientService.findByLogin(userDetails);
     }
 }

@@ -1,12 +1,16 @@
 package com.example.upseh2.controllers;
 
 import com.example.upseh2.dtos.TransporterDTO;
+import com.example.upseh2.entities.Transport;
+import com.example.upseh2.entities.Transporter;
 import com.example.upseh2.services.TransporterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/transporter")
@@ -16,13 +20,13 @@ public class TransporterController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<TransporterDTO> getAllTransporters(Pageable pageable){
+    public Page<Transporter> getAllTransporters(Pageable pageable){
         return transporterService.getAllTransporters(pageable);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TransporterDTO getTransporterById(@PathVariable long id){
+    public Transporter getTransporterById(@PathVariable long id){
         return transporterService.findById(id);
     }
 
@@ -40,7 +44,13 @@ public class TransporterController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TransporterDTO updateTransporter(@PathVariable long id, @RequestBody TransporterDTO TransporterDTO) {
+    public Transporter updateTransporter(@PathVariable long id, @RequestBody TransporterDTO TransporterDTO) {
         return transporterService.updateTransporter(id, TransporterDTO);
+    }
+
+    @GetMapping("/get_transports/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Transport> getTransportsList(@PathVariable long id){
+        return transporterService.getTransportsList(id);
     }
 }
